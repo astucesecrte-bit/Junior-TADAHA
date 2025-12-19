@@ -1,0 +1,7 @@
+{
+  "name": "Copy of FaceAttendance Pro",
+  "description": "Système de gestion de présence par reconnaissance faciale utilisant l'IA pour automatiser le suivi des étudiants.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
