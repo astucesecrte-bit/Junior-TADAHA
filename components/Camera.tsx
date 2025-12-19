@@ -1,6 +1,6 @@
 
 import React, { useRef, useEffect, useCallback, useState } from 'react';
-import { Camera as CameraIcon, RefreshCw, AlertCircle, Maximize } from 'lucide-react';
+import { Camera as CameraIcon, RefreshCw, AlertCircle, Maximize, ShieldCheck } from 'lucide-react';
 
 interface CameraProps {
   onCapture: (base64Image: string) => void;
@@ -75,16 +75,13 @@ const Camera: React.FC<CameraProps> = ({ onCapture, isProcessing }) => {
           />
           <canvas ref={canvasRef} className="hidden" />
           
-          {/* UI Overlays */}
           <div className="absolute inset-0 border-[20px] border-transparent group-hover:border-white/10 transition-all duration-500 pointer-events-none"></div>
           
-          {/* Corner decorations */}
           <div className="absolute top-6 left-6 w-8 h-8 border-t-4 border-l-4 border-white/60"></div>
           <div className="absolute top-6 right-6 w-8 h-8 border-t-4 border-r-4 border-white/60"></div>
           <div className="absolute bottom-6 left-6 w-8 h-8 border-b-4 border-l-4 border-white/60"></div>
           <div className="absolute bottom-6 right-6 w-8 h-8 border-b-4 border-r-4 border-white/60"></div>
 
-          {/* Scan Line when processing */}
           {isProcessing && <div className="scan-line"></div>}
           
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4">
@@ -116,5 +113,4 @@ const Camera: React.FC<CameraProps> = ({ onCapture, isProcessing }) => {
   );
 };
 
-import { ShieldCheck } from 'lucide-react';
 export default Camera;

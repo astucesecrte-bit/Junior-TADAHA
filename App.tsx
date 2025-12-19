@@ -10,12 +10,13 @@ import {
   X,
   Plus,
   ArrowRight,
-  Sparkles
+  Sparkles,
+  GraduationCap
 } from 'lucide-react';
-import { UserRole, Student, AttendanceRecord, ClassSession, UserSession } from './types';
-import AdminPortal from './components/AdminPortal';
-import StudentPortal from './components/StudentPortal';
-import Registration from './components/Registration';
+import { UserRole, Student, AttendanceRecord, ClassSession, UserSession } from './types.ts';
+import AdminPortal from './components/AdminPortal.tsx';
+import StudentPortal from './components/StudentPortal.tsx';
+import Registration from './components/Registration.tsx';
 
 const today = new Date();
 const INITIAL_SESSIONS: ClassSession[] = [
@@ -55,7 +56,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900">
-      {/* Background blobs for aesthetics */}
       <div className="blob top-[-10%] left-[-10%]" />
       <div className="blob bottom-[-10%] right-[-10%]" />
 
@@ -65,7 +65,7 @@ const App: React.FC = () => {
             <div className="bg-slate-900 p-2.5 rounded-2xl group-hover:rotate-12 transition-transform duration-300 shadow-xl shadow-slate-200">
               <Shield className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-black tracking-tighter text-slate-900">FaceID<span className="text-blue-600">.</span></span>
+            <span className="text-2xl font-black tracking-tighter text-slate-900">ENPD<span className="text-blue-600">.</span>FaceID</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -93,13 +93,13 @@ const App: React.FC = () => {
           <div className="flex flex-col items-center justify-center min-h-[65vh] text-center space-y-12 animate-in fade-in zoom-in duration-1000">
             <div className="space-y-8 max-w-4xl">
               <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full glass text-blue-700 text-xs font-black uppercase tracking-[0.2em] shadow-sm mx-auto">
-                <Sparkles className="w-4 h-4" /> Nouvelle Génération
+                <GraduationCap className="w-4 h-4" /> Ecole Nationale Polytechnique de Douala
               </div>
               <h1 className="text-6xl md:text-9xl font-black text-slate-900 leading-[0.9] tracking-tighter">
                 La présence <br/> devance le <span className="text-blue-600">temps.</span>
               </h1>
               <p className="text-xl md:text-2xl text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed">
-                Plus qu'un simple appel, une expérience biométrique fluide pour les universités du futur.
+                Système intelligent de gestion de présence biométrique développé par <span className="text-slate-900 font-bold">Junior Tadaha</span> pour l'ENPD.
               </p>
             </div>
 
@@ -113,8 +113,8 @@ const App: React.FC = () => {
             <div className="w-full max-w-5xl mt-24">
                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {[
-                    { label: "Vérification IA", icon: "✨", desc: "Précision de 99% grâce aux modèles Gemini." },
-                    { label: "Zéro Fraude", icon: "🛡️", desc: "Sécurité biométrique inviolable." },
+                    { label: "Vérification IA", icon: "✨", desc: "Précision de 99% grâce aux modèles Gemini de Google." },
+                    { label: "ENPD Standard", icon: "🛡️", desc: "Conforme aux exigences de l'Ecole Polytechnique." },
                     { label: "Data Insight", icon: "📈", desc: "Analyses temps-réel pour l'administration." }
                   ].map((f, i) => (
                     <div key={i} className="glass p-10 rounded-[2.5rem] text-left hover:border-blue-200 transition-all">
@@ -134,18 +134,18 @@ const App: React.FC = () => {
             <div className="glass p-10 rounded-[3rem] shadow-2xl space-y-8">
               <div className="text-center">
                 <h2 className="text-4xl font-black text-slate-900 tracking-tight">Bonjour !</h2>
-                <p className="text-slate-500 font-medium mt-2">Heureux de vous revoir.</p>
+                <p className="text-slate-500 font-medium mt-2">Accès au portail ENPD.</p>
               </div>
               <form className="space-y-6" onSubmit={(e) => {
                 e.preventDefault();
                 const email = (e.currentTarget.elements.namedItem('email') as HTMLInputElement).value;
                 const found = students.find(s => s.email === email);
                 if (found) { setSession({role: UserRole.STUDENT, user: found}); setView('portal'); }
-                else alert("Email inconnu.");
+                else alert("Compte non trouvé à l'ENPD.");
               }}>
-                <input name="email" type="email" placeholder="Email" className="w-full px-6 py-5 glass border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none font-bold" required />
+                <input name="email" type="email" placeholder="Email institutionnel" className="w-full px-6 py-5 glass border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none font-bold" required />
                 <input type="password" placeholder="Mot de passe" className="w-full px-6 py-5 glass border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none font-bold" required />
-                <button type="submit" className="w-full py-6 bg-slate-900 text-white rounded-2xl font-black text-lg hover:bg-blue-600 transition-all shadow-xl shadow-slate-200">Continuer</button>
+                <button type="submit" className="w-full py-6 bg-slate-900 text-white rounded-2xl font-black text-lg hover:bg-blue-600 transition-all shadow-xl shadow-slate-200">Connexion ENPD</button>
               </form>
             </div>
           </div>
@@ -160,13 +160,19 @@ const App: React.FC = () => {
       <footer className="py-12 mt-20 border-t border-slate-100 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
-             <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center font-black">F</div>
-             <p className="text-slate-400 font-bold text-sm uppercase tracking-widest">FaceID Pro Systems</p>
+             <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center font-black text-white">E</div>
+             <div>
+               <p className="text-slate-900 font-black text-sm uppercase tracking-widest">ENPD Douala</p>
+               <p className="text-slate-400 text-xs font-bold">Par Junior Tadaha</p>
+             </div>
           </div>
-          <div className="flex gap-8 text-sm font-bold text-slate-400">
-            <a href="#" className="hover:text-slate-900 transition-colors">Politique</a>
-            <a href="#" className="hover:text-slate-900 transition-colors">Support</a>
-            <a href="#" className="hover:text-slate-900 transition-colors">API</a>
+          <div className="text-center md:text-right">
+            <p className="text-slate-400 font-bold text-xs uppercase tracking-widest">
+              © 2024 Junior Tadaha - Tous droits réservés
+            </p>
+            <p className="text-slate-400 text-[10px] mt-1">
+              Ecole Nationale Polytechnique de Douala (ENPD)
+            </p>
           </div>
         </div>
       </footer>
